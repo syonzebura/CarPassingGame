@@ -427,9 +427,10 @@ GameObject:
   - component: {fileID: 5638279562666593970}
   - component: {fileID: 668969571441163592}
   - component: {fileID: 5820969501876067230}
+  - component: {fileID: -7125589707312174064}
   m_Layer: 0
   m_Name: LeftotherCar
-  m_TagString: Untagged
+  m_TagString: LeftCar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -515,3 +516,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Lspeed: 18
+--- !u!114 &-7125589707312174064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3760957219784096826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2ae052044af1415d8919b4bc366380e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

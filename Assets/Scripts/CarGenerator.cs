@@ -8,10 +8,16 @@ public class CarGenerator : MonoBehaviour
     public GameObject Leftothercar;
     public GameObject Rightothercar;
 
-    // 距離を不規則にする(まだ未使用）
+    // 距離を不規則にする
     private float adjustDistance=0;
     //ゴールを取得
     private GameObject Goal;
+
+    //Playerの取得
+    private GameObject player;
+
+    //Goal-Playerの距離
+    private float GPdistance;
     
     
     // Start is called before the first frame update
@@ -20,20 +26,25 @@ public class CarGenerator : MonoBehaviour
         //ゴールを取得
         this.Goal = GameObject.Find("Goal");
 
+        //プレイヤーを取得
+        this.player = GameObject.Find("Player");
+
         //両車線の車を生成
-        for(int i = 30; i < 200; i += 30)
+        for(int i = 30; i < this.Goal.transform.position.z; i += 30)
         {
+            this.adjustDistance = Random.Range(-10, 10);
             GameObject lC = Instantiate(this.Leftothercar);
-            lC.transform.position = new Vector3(-2.5f, 0.5f, i);
+            lC.transform.position = new Vector3(-2.5f, 0.5f, i+this.adjustDistance);
         }
 
-        for (float i =this.Goal.transform.position.z; i >40; i -= 100)
+        for (float i =this.Goal.transform.position.z; i >40; i -= 150)
         {
+            this.adjustDistance = Random.Range(-20, 20);
             GameObject RC = Instantiate(Rightothercar);
-            RC.transform.position = new Vector3(2.5f, 0.5f, i);
+            RC.transform.position = new Vector3(2.5f, 0.5f, i+this.adjustDistance);
         }
 
-        //右車線（対向車線）の車の追加生成
+        //右車線（対向車線）の車の追加生成。ししおどし式でupdate内でやってもよかったが、最初配置した車とタイミングが被る可能性あるためなし
         StartCoroutine("GanarateRightCar");
 
     }
@@ -41,7 +52,7 @@ public class CarGenerator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        this.GPdistance = this.Goal.transform.position.z - this.player.transform.position.z;
     }
 
     //右車線（対向車線）の車の追加生成
@@ -49,10 +60,15 @@ public class CarGenerator : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(7f);
-            GameObject lC = Instantiate(this.Rightothercar);
-            lC.transform.position= new Vector3(2.5f, 0.5f, this.Goal.transform.position.z);
+            float ajusttime = Random.Range(-1, 1);
+            yield return new WaitForSeconds(6f + ajusttime);
+            if (this.GPdistance > 300)//ゴール直前に車が生成されることを防ぐ
+            {
+                GameObject lC = Instantiate(this.Rightothercar);
+                lC.transform.position = new Vector3(2.5f, 0.5f, this.Goal.transform.position.z);
+            }
             
+
         }
     }
 
