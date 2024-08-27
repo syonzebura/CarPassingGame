@@ -18,4 +18,10 @@ public class LeftotherCarController : MonoBehaviour
     {
         this.myrigid.velocity = new Vector3(0, 0, this.Lspeed);
     }
+
+    //ゴールに触れたら壊す
+    private void OnTriggerEnter(Collider other)
+    {
+        Destroy(this.gameObject);
+    }
 }

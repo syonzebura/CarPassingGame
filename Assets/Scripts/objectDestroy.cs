@@ -7,7 +7,7 @@ public class objectDestroy : MonoBehaviour
     //プレイヤーの位置参照して、プレイヤーよりオブジェクトを削除する
 
     private GameObject player;
-    private float safetyLine = 30f;
+    private float safetyLine = 50f;
     // Start is called before the first frame update
     void Start()
     {

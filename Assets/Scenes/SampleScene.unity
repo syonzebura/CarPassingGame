@@ -195,6 +195,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4870167790249810, guid: 2dc42346e5313b34c93d598a61994629, type: 3}
   m_PrefabInstance: {fileID: 1142607744}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &510789693 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 71269900680221634, guid: faa60799e0d024804a402e34254678a8, type: 3}
+  m_PrefabInstance: {fileID: 2235425563072078889}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &622534546
 GameObject:
   m_ObjectHideFlags: 0
@@ -636,7 +641,7 @@ GameObject:
   - component: {fileID: 1370970728}
   m_Layer: 0
   m_Name: Goal
-  m_TagString: Untagged
+  m_TagString: Goal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -674,9 +679,67 @@ Transform:
   m_LocalPosition: {x: 0, y: 3, z: 690}
   m_LocalScale: {x: 12, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 510789693}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &2235425563072078889
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1370970729}
+    m_Modifications:
+    - target: {fileID: 71269900680221634, guid: faa60799e0d024804a402e34254678a8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 71269900680221634, guid: faa60799e0d024804a402e34254678a8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.78
+      objectReference: {fileID: 0}
+    - target: {fileID: 71269900680221634, guid: faa60799e0d024804a402e34254678a8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 71269900680221634, guid: faa60799e0d024804a402e34254678a8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7070118
+      objectReference: {fileID: 0}
+    - target: {fileID: 71269900680221634, guid: faa60799e0d024804a402e34254678a8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7070119
+      objectReference: {fileID: 0}
+    - target: {fileID: 71269900680221634, guid: faa60799e0d024804a402e34254678a8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.011586303
+      objectReference: {fileID: 0}
+    - target: {fileID: 71269900680221634, guid: faa60799e0d024804a402e34254678a8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.011586301
+      objectReference: {fileID: 0}
+    - target: {fileID: 71269900680221634, guid: faa60799e0d024804a402e34254678a8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 71269900680221634, guid: faa60799e0d024804a402e34254678a8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 71269900680221634, guid: faa60799e0d024804a402e34254678a8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8835265987370864245, guid: faa60799e0d024804a402e34254678a8, type: 3}
+      propertyPath: m_Name
+      value: Torii (Double Color)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: faa60799e0d024804a402e34254678a8, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - LeftCar
   - RightCar
+  - Goal
   layers:
   - Default
   - TransparentFX
