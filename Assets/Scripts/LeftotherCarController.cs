@@ -16,7 +16,7 @@ public class LeftotherCarController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        this.myrigid.velocity = new Vector3(0, 0, this.Lspeed);
+        this.myrigid.velocity = new Vector3(0, this.myrigid.velocity.y, this.Lspeed);
     }
 
     //ゴールに触れたら壊す

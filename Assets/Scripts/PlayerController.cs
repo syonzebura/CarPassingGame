@@ -30,29 +30,29 @@ public class PlayerController : MonoBehaviour
 
         if (this.canController == true)
         {
-            //左右の動き
-            if (Input.GetKey(KeyCode.RightArrow))
+            //左右の動き(行動制限込み）
+            if (Input.GetKey(KeyCode.RightArrow) && transform.position.x < 4.5f)
             {
                 velocityX = this.rightSpeed;
             }
-            else if (Input.GetKey(KeyCode.LeftArrow))
+            else if (Input.GetKey(KeyCode.LeftArrow)&&transform.position.x>-4.5f)
             {
                 velocityX = this.leftSpeed;
             }
-            //加速減速
-            if (Input.GetKey(KeyCode.UpArrow))
+            //加速減速（速度制限込み）
+            if (Input.GetKey(KeyCode.UpArrow)&&this.speed<50)
             {
                 this.speed += 0.18f;
             }
-            else if (Input.GetKey(KeyCode.DownArrow))
+            else if (Input.GetKey(KeyCode.DownArrow)&&this.speed>0)
             {
                 this.speed -= 0.5f;
             }
         }
 
+
         
-        
-        this.myrigid.velocity = new Vector3(velocityX, 0, this.speed);
+        this.myrigid.velocity = new Vector3(velocityX, this.myrigid.velocity.y, this.speed);
     }
 
     //車がぶつかった時の処理

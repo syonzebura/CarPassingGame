@@ -15,7 +15,7 @@ public class RightotherCarController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        this.myrigid.velocity = new Vector3(0, 0, this.Rspeed);
+        this.myrigid.velocity = new Vector3(0, this.myrigid.velocity.y, this.Rspeed);
 
         //デバック用
         /*
