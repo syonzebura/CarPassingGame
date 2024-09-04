@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -18,8 +19,34 @@ public class PlayerController : MonoBehaviour
     private bool carcollison = false;
     //車が壊れるカウント変数
     private int breakCount = 0;
-    
 
+    //タイムリミットのテキスト
+    private GameObject timeText;
+    //タイムリミットの変数
+    public float timeLimit;
+
+    //speedcircleのゲームオブジェクト取得
+    private GameObject speedcircle;
+
+    //speedTextのオブジェクト取得
+    private GameObject speedText;
+
+    //GameOvercolorを取得
+    public GameObject GameOvercolor;
+
+    //fadeoutのため
+    public GameObject Gop;
+
+    /*
+    //Limtのテキスト
+    private GameObject LimtText;
+    //Limt点滅のタイム
+    private float Limttime;
+    //Limtの点滅速度
+    private float LimtSpeed=0.5f;
+    //Limtのテキスト
+    private Text LimttextCp;
+    */
     // Start is called before the first frame update
 
     void Start()
@@ -28,18 +55,60 @@ public class PlayerController : MonoBehaviour
         Application.targetFrameRate = 60;
 
         this.myrigid = GetComponent<Rigidbody>();
+
+        //タイムリミットオブジェクトを取得
+        this.timeText = GameObject.Find("TimeText");
+
+        //speedcircleを取得
+        this.speedcircle = GameObject.Find("speedcircle");
+        //speedtextの取得
+        this.speedText = GameObject.Find("speedText");
+
+        /*
+        //Limtオブジェクトを取得
+        this.LimtText = GameObject.Find("LimtText");
+        //LimtのTextコンポーネントを取得
+        this.LimttextCp = this.LimtText.GetComponent<Text>();
+        */
     }
 
     // Update is called once per frame
     void Update()
     {
         float velocityX = 0;
+        //Limtの点滅を実行
+        /*this.LimttextCp.color = LimtGetTextColorAlpha(this.LimttextCp.color);*/
 
+        
 
-        if (this.canController == true|| this.Gamesituation==true)
+        if (this.canController == true&&this.Gamesituation==true)
         {
+            //ちょっとずつ減速する
+            this.speed *= 0.999f;
+            //表示速度を表示
+            float showSpeed = this.speed * 0.02f;
+            //speedcircleを変動
+            this.speedcircle.GetComponent<Image>().fillAmount = showSpeed;
+            //speedTextを変動
+            float speedtextspeed = this.speed * 2.5f;
+            this.speedText.GetComponent<Text>().text = speedtextspeed.ToString("F0");
+            //タイムリミットの計算
+            this.timeLimit -= Time.deltaTime;
+            //タイムリミットの表示
+            this.timeText.GetComponent<Text>().text = "00:" + this.timeLimit.ToString("F3");
+
+            //左右の行動制限
+            if (transform.position.x < -4.1f)
+            {
+                transform.position=new Vector3(-4.1f,transform.position.y,transform.position.z);
+            }
+            else if (transform.position.x > 4.1f)
+            {
+                transform.position = new Vector3(4.1f, transform.position.y, transform.position.z);
+            }
+
             //左右の動き(行動制限込み）
-            if (Input.GetKey(KeyCode.RightArrow) && transform.position.x < 4.2f)
+            if (Input.GetKey(KeyCode.RightArrow) && transform.position.x < 4.1f)
             {
                 velocityX = this.rightSpeed;
             }
@@ -50,11 +119,13 @@ public class PlayerController : MonoBehaviour
             //加速減速（速度制限込み）
             if (Input.GetKey(KeyCode.UpArrow)&&this.speed<50)
             {
-                this.speed += 0.18f;
+                //this.speed += 0.16f;
+                this.speed *= 1.005f;
             }
-            else if (Input.GetKey(KeyCode.DownArrow)&&this.speed>0)
+            else if (Input.GetKey(KeyCode.DownArrow)&&this.speed>10)
             {
-                this.speed -= 0.5f;
+                //this.speed -= 0.5f;
+                this.speed *= 0.99f;
             }
 
 
@@ -64,9 +135,22 @@ public class PlayerController : MonoBehaviour
             if (this.transform.eulerAngles.y>20&&this.transform.eulerAngles.y<340)
             {
                 this.breakCount+= 3;
+                this.timeText.GetComponent<Text>().text = "---" + "---- ";
+                //Txetの色を変える
+                Text textobj=this.timeText.GetComponent<Text>();
+                textobj.color = new Color(1.0f, 0, 0, 1.0f);
                 //810
                 //Debug.Log("hit");
-                
+
+            }
+            //もしもtimeLimtが0を切ったらbreakcountを3にする
+            else if (this.timeLimit < 0)
+            {
+                this.breakCount += 3;
+                this.timeText.GetComponent<Text>().text = "00:" + "0.000 ";
+                //Txetの色を変える
+                Text textobj = this.timeText.GetComponent<Text>();
+                textobj.color = new Color(1.0f, 0, 0, 1.0f);
             }
 
             //もしもbreakCountが3になったらゲームオーバー this.Gamesituationのおかげでupdate内でコルーチン使える
@@ -74,6 +158,14 @@ public class PlayerController : MonoBehaviour
             {
                 this.canController = false;
                 this.Gamesituation = false;
+                //ゲームオーバーならスピードメーターを変更
+                this.speedText.GetComponent<Text>().text = "---";
+                Text stextobj = this.speedText.GetComponent<Text>();
+                stextobj.color = new Color(1.0f, 0, 0, 1.0f);
+
+                //Gameovercolorを適用する
+                this.GameOvercolor.SetActive(true);
+
                 StartCoroutine("GameOverWaitTime");
             }
             //プレイ中は車の角度を固定する
@@ -111,8 +203,6 @@ public class PlayerController : MonoBehaviour
             /*Vector3 firstAngle = new Vector3(0, 360, 0);
             transform.eulerAngles = firstAngle;*/
 
-           
-
             this.carcollison = false;
             
             
@@ -123,6 +213,8 @@ public class PlayerController : MonoBehaviour
     IEnumerator GameOverWaitTime()
     {
         yield return new WaitForSeconds(2.0f);
+        this.Gop.GetComponent<fadeoutController>().GameOverFadeout();
+        yield return new WaitForSeconds(1.0f);
         SceneManager.LoadScene("SampleScene");
 
     }
@@ -139,10 +231,21 @@ public class PlayerController : MonoBehaviour
     //ゴールしてから少し時間をおいてゲームクリアにする
     IEnumerator GameClearWaitTime()
     {
-        this.speed = 0f;
+        this.speed = 10f;
         yield return new WaitForSeconds(2.0f);
         SceneManager.LoadScene("SampleScene");
     }
+
+    //Limtの点滅
+    /*Color LimtGetTextColorAlpha(Color color)
+    {
+        this.Limttime += Time.deltaTime * this.LimtSpeed * 5.0f;
+        color.a = Mathf.Sin(this.Limttime);
+        return color;
+    }*/
+
+
+    
     
 
 }

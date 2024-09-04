@@ -34,14 +34,18 @@ public class CarGenerator : MonoBehaviour
         {
             this.adjustDistance = Random.Range(-10, 10);
             GameObject lC = Instantiate(this.Leftothercar);
-            lC.transform.position = new Vector3(-2.4f, 0.5f, i+this.adjustDistance);
+            //本来の位置
+            //lC.transform.position = new Vector3(-2.4f, 0.5f, i+this.adjustDistance);
+            lC.transform.position = new Vector3(Random.Range(-2.4f, -2.0f), 0.5f, i + this.adjustDistance);
         }
 
         for (float i =this.Goal.transform.position.z; i >40; i -= 150)
         {
             this.adjustDistance = Random.Range(-20, 20);
             GameObject RC = Instantiate(Rightothercar);
-            RC.transform.position = new Vector3(2.4f, 0.5f, i+this.adjustDistance);
+            //本来の位置
+            //RC.transform.position = new Vector3(2.4f, 0.5f, i+this.adjustDistance);
+            RC.transform.position = new Vector3(Random.Range(2.0f,2.4f), 0.5f, i + this.adjustDistance);
         }
 
         //右車線（対向車線）の車の追加生成。ししおどし式でupdate内でやってもよかったが、最初配置した車とタイミングが被る可能性あるためなし
@@ -65,7 +69,9 @@ public class CarGenerator : MonoBehaviour
             if (this.GPdistance > 300)//ゴール直前に車が生成されることを防ぐ
             {
                 GameObject lC = Instantiate(this.Rightothercar);
-                lC.transform.position = new Vector3(2.4f, 0.5f, this.Goal.transform.position.z);
+                //本来の位置
+                //lC.transform.position = new Vector3(2.4f, 0.5f, this.Goal.transform.position.z);
+                lC.transform.position = new Vector3(Random.Range(2.0f, 2.4f), 0.5f, this.Goal.transform.position.z);
             }
             
 
