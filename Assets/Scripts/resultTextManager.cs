@@ -16,8 +16,13 @@ public class resultTextManager : MonoBehaviour
         this.resultText = GetComponent<Text>();
         //Opentimeを代入
         this.timeresult = PlayerController.Opentime;
+
         //それぞれの判定
-        if (this.timeresult > 35)
+        if (this.timeresult <= 24 && PlayerController.hitCount == 0)
+        {
+            this.resultText.text = "Perfect!!";
+        }
+        else if (this.timeresult > 35)
         {
             this.resultText.text = "タラタラしてんじゃねーよ";
         }
@@ -45,6 +50,10 @@ public class resultTextManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (this.timeresult <= 24 && PlayerController.hitCount == 0)
+        {
+            this.resultText.color = Color.HSVToRGB(Time.time % 1, 1, 1);
+        }
         
     }
 }

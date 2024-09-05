@@ -48,6 +48,9 @@ public class PlayerController : MonoBehaviour
 
     //timeのstatic化
     public static float Opentime;
+
+    //staticのhitcount
+    public static int hitCount;
     /*
     //Limtのテキスト
     private GameObject LimtText;
@@ -84,6 +87,9 @@ public class PlayerController : MonoBehaviour
         //エンジン音の音量調節
         this.engineSound.volume = SoundController.musicVolume*0.8f;
 
+        //hitCountの初期化
+        hitCount = 0;
+
         /*
         //Limtオブジェクトを取得
         this.LimtText = GameObject.Find("LimtText");
@@ -95,6 +101,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         float velocityX = 0;
         //Limtの点滅を実行
         /*this.LimttextCp.color = LimtGetTextColorAlpha(this.LimttextCp.color);*/
@@ -225,6 +232,7 @@ public class PlayerController : MonoBehaviour
         {
             //HITse
             this.soundManager.GetComponent<SceneSoundManager>().HITse();
+            hitCount += 1;
             //this.breakCount += 1;
             this.carcollison = true;
             //810

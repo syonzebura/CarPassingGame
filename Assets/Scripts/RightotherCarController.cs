@@ -18,11 +18,13 @@ public class RightotherCarController : MonoBehaviour
         this.myrigid.velocity = new Vector3(0, this.myrigid.velocity.y, this.Rspeed);
 
         //デバック用
+
         /*
         if (Input.GetKey(KeyCode.Space))
         {
             Destroy(this.gameObject);
         }
         */
+        
     }
 }

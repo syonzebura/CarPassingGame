@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class SoundController : MonoBehaviour
 {
     //全シーン共通のサウンド変数
-    public static float musicVolume = 1.0f;
+    public static float musicVolume=0.3f;
 
     //sliderを代入するため
     private Slider slider;
@@ -15,6 +15,7 @@ public class SoundController : MonoBehaviour
     void Start()
     {
         this.slider = GetComponent<Slider>();
+        this.slider.value = musicVolume;
     }
 
     // Update is called once per frame

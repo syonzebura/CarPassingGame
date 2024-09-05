@@ -14,7 +14,11 @@ public class ResultButtonManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //スペースキーが押された際はリトライできるようにする
+        if (Input.GetKey(KeyCode.Space))
+        {
+            SceneManager.LoadScene("SampleScene");
+        }
     }
 
     public void OnclickRetryButton()
