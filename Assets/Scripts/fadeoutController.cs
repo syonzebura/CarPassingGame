@@ -33,7 +33,7 @@ public class fadeoutController : MonoBehaviour
         }
     }
 
-    public void GameOverFadeout()
+    public void Fadeout()
     {
         this.isFadeout = true;
 
